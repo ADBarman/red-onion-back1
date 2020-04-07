@@ -80,6 +80,27 @@ app.post("/placeOrder", (req, res) => {
   });
 });
 
+//for inventory add
+app.post('/addFood', (req, res) => {
+  const food = req.body;
+  client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect(err => {
+      const collection = client.db("redOnion1").collection("foods");
+      collection.insert(food, (err, result) =>{
+          if(err){
+              console.log(err);
+              res.status(500).send({message:err});
+          }
+          else {
+              res.send(result.ops[0]);
+          }
+      });
+      console.log('Database connected..');
+      client.close();
+  });
+  console.log('data received',req.body);
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => { 
   console.log("listening port " + port);
