@@ -16,7 +16,7 @@ app.get('/' , (req, res) => {
   res.send("Welcome to Red Onion Server");
 })
 
-app.get("/foods", (req, res) => {
+app.get("/food", (req, res) => {
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((err) => {
     const collection = client.db("redOnion1").collection("foods");
