@@ -36,7 +36,6 @@ app.get("/food", (req, res) => {
 });
 
 app.get("/food/:id", (req, res) => {
-  console.log(req.query.sort);
   const id = req.params.id;
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((err) => {
@@ -46,13 +45,9 @@ app.get("/food/:id", (req, res) => {
         console.log(err);
         res.status(500).send({ message: err });
       } else {
-        //console.log("successfully inserted", id);
-        // console.log(documents[id]);
-
-        res.send(documents[id]); 
+        res.send(documents[0]); 
       }
     });
-    //console.log("database connected...");
     client.close();
   });
 });
