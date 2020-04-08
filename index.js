@@ -36,11 +36,11 @@ app.get("/food", (req, res) => {
 });
 
 app.get("/food/:id", (req, res) => {
-  const id = req.params.id;
+  const foodId = Number(req.params.id)
   client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect((err) => {
     const collection = client.db("redOnion1").collection("foods");
-    collection.find({id}).toArray((err, documents) => {
+    collection.find({id:foodId}).toArray((err, documents) => {
       if (err) {
         console.log(err);
         res.status(500).send({ message: err });
